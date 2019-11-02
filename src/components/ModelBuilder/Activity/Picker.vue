@@ -1,31 +1,73 @@
 <template>
-  <div>{{ suggestedActivities }}</div>
+  <div>
+    <div>
+      <div>
+        <!-- suggested activities -->
+        <ActivityCard
+          v-for="(activity, i) in suggestedActivities"
+          :key="i"
+          :activityId="activity.suggestedActId"
+          v-on:click="addActivity"
+        />
+      </div>
+      <hr />
+      <div>
+        <!-- all activities -->
+        <!-- <ActivityCard v-for="(activity,i) in allActivities" :key="i" :activityData="activity"  v-on:click="addActivity" />   -->
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { host } from "@/server.js";
+import { mapGetters, mapMutations } from "vuex";
+import ActivityCard from "./ActivityCard";
 export default {
   name: "Picker",
   data() {
     return {
+      allActivities: [],
       suggestedActivities: []
     };
   },
-  computed: {
-    lastActivity() {
-      const x = this.$state.getters.lastActivity || 0;
-      return x;
+  components: {
+    ActivityCard
+  },
+  computed: mapGetters({
+    selectedOrg: "selectedOrgChanged",
+    selectedDept: "selectedDeptChanged",
+    lastActivity: "lastActivity"
+  }),
+  watch: {
+    lastActivity(newVal) {
+      console.log("Showing new suggestion for", newVal);
+      this.getSuggestedActivities();
     }
   },
-  watch: {
-    suggestedActivities: async function() {
-      console.log("Chala");
-      const lastActivityId = this.lastActivity.id;
+  methods: {
+    ...mapMutations(["addActivity"]),
+    getAllActivities: async function() {
       const res = await fetch(
-        "http:///127.0.0.1:5000/api/activityScore/act/" + lastActivityId
+        `${host}/api/org/${this.selectedOrg.id}/dept/${this.selectedDept.id}/act/`
       );
       const acts = await res.json();
-      return acts;
+      this.allActivities = acts;
+    },
+    getSuggestedActivities: async function() {
+      this.suggestedActivities = [];
+      const res = await fetch(
+        `${host}/api/org/${this.selectedOrg.id}/dept/${
+          this.selectedDept.id
+        }/activityScore/${this.lastActivity.id || 0}`
+      );
+      const acts = await res.json();
+      this.suggestedActivities = acts;
     }
+  },
+  created() {
+    this.getAllActivities();
+    this.getSuggestedActivities();
   }
 };
 </script>

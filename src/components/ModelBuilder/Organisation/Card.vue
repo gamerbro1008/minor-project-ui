@@ -1,8 +1,8 @@
 <template>
-  <div v-if="orgData != null" v-on:click="orgSelected">
+  <div v-if="orgData != null" v-on:click="orgSelected" class="card">
     <h3>{{ orgData.name }}</h3>
   </div>
-  <div v-else v-on:click="deptSelected">
+  <div v-else v-on:click="deptSelected" class="card">
     <h3>{{ deptData.name }}</h3>
     <p>{{ deptData.description }}</p>
   </div>

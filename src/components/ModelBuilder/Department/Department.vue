@@ -5,13 +5,14 @@
     <Card v-for="(dept, i) in depts" v-bind:key="i" v-bind:deptData="dept" />
   </div>
   <div v-else>
-    <h1>You have selected {{ selectedDept.name }} department type.</h1>
+    <h1>You have selected {{ selectedDept.name }} department</h1>
     <button v-on:click="clearDept">Need something else?</button>
     <Activity />
   </div>
 </template>
 
 <script>
+import { host } from "@/server.js";
 import { mapGetters } from "vuex";
 import Card from "../Organisation/Card";
 import Activity from "../Activity/Activity";
@@ -30,7 +31,7 @@ export default {
   },
   methods: {
     getDeptsFromServer: async function() {
-      const server = "http://127.0.0.1:5000";
+      const server = host;
       const api = `/api/org/${this.selectedOrg.id}/dept/`;
       const res = await fetch(server + api);
       const depts = await res.json();

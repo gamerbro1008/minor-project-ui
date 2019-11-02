@@ -1,13 +1,25 @@
 <template>
   <div>
+    {{ selectedPosition }}
     <ol>
-      <li v-for="(act, i) in activites" v-bind:key="i">{{ act }}</li>
+      <li
+        v-for="(act, i) in activites"
+        v-bind:key="i"
+        v-on:click="setSelected(act.key)"
+        class="card"
+      >
+        <ul>
+          <li v-for="(data, name) in act" :key="name">
+            {{ name }} - {{ data }}
+          </li>
+        </ul>
+      </li>
     </ol>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "Viewer",
   computed: {
@@ -18,6 +30,12 @@ export default {
       //   activities: "activities",
       selectedPosition: "selectedPosition"
     })
+  },
+  methods: {
+    ...mapMutations(["changeSelectedPosition"]),
+    setSelected: function(key) {
+      this.changeSelectedPosition(key);
+    }
   }
 };
 </script>

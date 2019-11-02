@@ -14,4 +14,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.card {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 20px;
+  user-select: none;
+}
+</style>
