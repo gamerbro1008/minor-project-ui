@@ -2,6 +2,7 @@
   <div>
     <div>
       <div>
+        <h3>Suggested</h3>
         <!-- suggested activities -->
         <ActivityCard
           v-for="(activity, i) in suggestedActivities"
@@ -12,8 +13,14 @@
       </div>
       <hr />
       <div>
+        <h3>All</h3>
         <!-- all activities -->
-        <!-- <ActivityCard v-for="(activity,i) in allActivities" :key="i" :activityData="activity"  v-on:click="addActivity" />   -->
+        <ActivityCard
+          v-for="(activity, i) in allActivities"
+          :key="i"
+          :activityData="activity"
+          v-on:click="addActivity"
+        />
       </div>
     </div>
   </div>
@@ -40,8 +47,7 @@ export default {
     lastActivity: "lastActivity"
   }),
   watch: {
-    lastActivity(newVal) {
-      console.log("Showing new suggestion for", newVal);
+    lastActivity() {
       this.getSuggestedActivities();
     }
   },
