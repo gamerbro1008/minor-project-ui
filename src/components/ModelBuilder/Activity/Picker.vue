@@ -13,14 +13,29 @@
       </div>
       <hr />
       <div>
+        <h3>Searched</h3>
+        <input type="text" v-model="searchTerm" placeholder="search" />
+        <ActivityCard
+          v-for="(activity, i) in searchedActivities"
+          :key="i"
+          :activityId="activity.suggestedActId"
+          v-on:click="addActivity"
+        />
+      </div>
+
+      <!-- <hr />
+      <div>
         <h3>All</h3>
-        <!-- all activities -->
         <ActivityCard
           v-for="(activity, i) in allActivities"
           :key="i"
           :activityData="activity"
           v-on:click="addActivity"
         />
+      </div> -->
+      <hr />
+      <div>
+        <Create />
       </div>
     </div>
   </div>
@@ -30,16 +45,20 @@
 import { host } from "@/server.js";
 import { mapGetters, mapMutations } from "vuex";
 import ActivityCard from "./ActivityCard";
+import Create from "./Create";
 export default {
   name: "Picker",
   data() {
     return {
       allActivities: [],
-      suggestedActivities: []
+      suggestedActivities: [],
+      searchTerm: "",
+      searchedActivities: []
     };
   },
   components: {
-    ActivityCard
+    ActivityCard,
+    Create
   },
   computed: mapGetters({
     selectedOrg: "selectedOrgChanged",
@@ -49,6 +68,9 @@ export default {
   watch: {
     lastActivity() {
       this.getSuggestedActivities();
+    },
+    searchTerm() {
+      this.getSearchedActivities();
     }
   },
   methods: {
@@ -69,6 +91,17 @@ export default {
       );
       const acts = await res.json();
       this.suggestedActivities = acts;
+    },
+    getSearchedActivities: async function() {
+      this.searchedActivities = [];
+      if (this.searchTerm == "" || this.searchTerm == null) {
+        return;
+      }
+      const res = await fetch(
+        `${host}/api/org/${this.selectedOrg.id}/dept/${this.selectedDept.id}/activityScore/${this.lastActivity.id}/search/${this.searchTerm}`
+      );
+      const acts = await res.json();
+      this.searchedActivities = acts;
     }
   },
   created() {

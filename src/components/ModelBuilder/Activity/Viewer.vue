@@ -1,6 +1,7 @@
 <template>
   <div>
-    {{ selectedPosition }}
+    <div>Selected Node: {{ selectedPosition }}</div>
+    <FlowchartOperations />
     <Flowchart :nodes="allActivities" v-if="isRefreshing == false" />
     <!-- <ol>
       <li
@@ -20,6 +21,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import Flowchart from "./Flowchart";
+import FlowchartOperations from "./FlowcartOperations";
 export default {
   name: "Viewer",
   computed: {
@@ -53,7 +55,8 @@ export default {
     }
   },
   components: {
-    Flowchart
+    Flowchart,
+    FlowchartOperations
   }
 };
 </script>

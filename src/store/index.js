@@ -50,21 +50,50 @@ export default new Vuex.Store({
 
       state.selectedActivities.push(activity);
     },
-    removeActivity(state, key) {
-      const parentOfKeyActivity = state.selectedActivities.filter(
+    removeActivity(state) {
+      const key = state.selectedKey;
+
+      const parentsOfKeyActivity = state.selectedActivities.filter(
         x => x.key == key
       )[0].parent;
+
+      let index = -1;
+      let i = 0;
       state.selectedActivities.forEach(activity => {
         if (activity.parent.includes(key)) {
+          console.log("child found");
+
           const index = activity.parent.indexOf(key);
           activity.parent.splice(index, 1);
-          activity.parent = [...activity.parent, ...parentOfKeyActivity];
+          activity.parent = [...activity.parent, ...parentsOfKeyActivity];
 
           if (activity.parent.length == 0) {
             activity.parent.push(0);
           }
         }
+        if (activity.key == key) {
+          index = i;
+        }
+        i++;
       });
+      state.selectedKey = parentsOfKeyActivity[0] || 0;
+      state.selectedActivities.splice(index, 1);
+    },
+    joinActivity(state, parentKey) {
+      const childActivity = state.selectedActivities.filter(
+        x => (x.key = state.selectedKey)
+      )[0];
+      console.log("child activity", childActivity);
+
+      // childActivity.parent.push(parentKey)
+      console.log("added parent", childActivity.parent);
+
+      state.selectedKey = parentKey;
+      const x = state.selectedActivities;
+      state.selectedActivities = {};
+      setTimeout(() => {
+        state.selectedActivities = x;
+      }, 5);
     },
     clearActivities(state) {
       state.selectedActivities = [];

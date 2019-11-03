@@ -26,7 +26,7 @@ export default {
     for (const node of this.nodes) {
       const key = node.key;
       const chartElement = this.chart.addElement(`${node.key}`, {
-        label: node.name
+        label: `${node.name} - (${node.key})`
       });
       chartElement.on("click", function() {
         that.changeSelectedPosition(key);
@@ -38,17 +38,6 @@ export default {
         }
       }
     }
-
-    // const idea = this.chart.addElement("idea");
-    // const A = this.chart.addElement("A", { label: "vscode" });
-    // const B = this.chart.addElement("B", { label: "github" });
-    // idea.leadsTo(A).leadsTo(B);
-    // const C = this.chart.addElement("C", { label: "npm" });
-    // A.leadsTo(C);
-
-    // A.on("click", function() {
-    //   console.log("click!");
-    // });
   },
   beforeDestroy() {
     console.log("Destroyed");
