@@ -6,8 +6,8 @@
       <input type="text" placeholder="name" v-model="name" />
       <input type="text" placeholder="description" v-model="description" />
     </div>
-    <button v-on:click="createActivity" :disabled="isSaving">Save</button>
-    {{ msg }}
+    <button @click="createActivity" :disabled="isSaving">Save</button>
+    <div>{{ msg }}</div>
   </div>
 </template>
 

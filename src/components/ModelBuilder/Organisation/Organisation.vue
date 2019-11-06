@@ -11,7 +11,7 @@
 
   <div v-else>
     <h1>You have selected {{ selectedOrg.name }} organisation</h1>
-    <button v-on:click="clearOrg">Need something else?</button>
+    <button v-on:click="clearOrg">Home</button>
     <Department />
   </div>
 </template>

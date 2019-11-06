@@ -46,4 +46,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.flow-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

@@ -1,20 +1,8 @@
 <template>
-  <div>
+  <div class="viewer">
     <div>Selected Node: {{ selectedPosition }}</div>
     <FlowchartOperations />
     <Flowchart :nodes="allActivities" v-if="isRefreshing == false" />
-    <!-- <ol>
-      <li
-        v-for="(act, i) in allActivities"
-        v-bind:key="i"
-        v-on:click="setSelected(act.key)"
-        class="card"
-      >
-        <ul>
-          <li v-for="(data, name) in act" :key="name">{{ name }} - {{ data }}</li>
-        </ul>
-      </li>
-    </ol>-->
   </div>
 </template>
 
@@ -61,4 +49,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.viewer {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+}
+</style>
