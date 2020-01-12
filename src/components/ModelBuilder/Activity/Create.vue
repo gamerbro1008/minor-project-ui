@@ -6,7 +6,9 @@
       <input type="text" placeholder="name" v-model="name" />
       <input type="text" placeholder="description" v-model="description" />
     </div>
-    <button @click="createActivity" :disabled="isSaving">Save</button>
+    <button @click="createActivity" :disabled="isSaving" class="btn">
+      Save
+    </button>
     <div>{{ msg }}</div>
   </div>
 </template>

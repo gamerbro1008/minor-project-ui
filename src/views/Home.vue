@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- <img class="fit-picture" src="@/assets/img/business_banner1.jpg" alt="business banner"> -->
     <ModelBuilder />
   </div>
 </template>
@@ -15,3 +16,4 @@ export default {
   }
 };
 </script>
+<style></style>

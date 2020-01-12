@@ -1,9 +1,13 @@
 <template>
   <div id="app">
+    <h1 style="color:navy;text-align:center;">
+      <font size="20">Business Buddy</font>
+    </h1>
+    <hr style="color:dark grey;height:2px;" />
     <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </div> -->
     <router-view />
   </div>
 </template>

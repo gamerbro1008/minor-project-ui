@@ -22,4 +22,8 @@ export default {
   margin: 20px;
   user-select: none;
 }
+/* .card :hover
+{
+  background-color:aqua;
+} */
 </style>

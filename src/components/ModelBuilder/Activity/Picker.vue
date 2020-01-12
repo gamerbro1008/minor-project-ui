@@ -2,7 +2,8 @@
   <div>
     <div>
       <div>
-        <h3>Suggested</h3>
+        <h3>Recommended Activities</h3>
+        <h4>Click the suggestion to add activity in flowchart.</h4>
         <!-- suggested activities -->
         <ActivityCard
           v-for="(activity, i) in suggestedActivities"
