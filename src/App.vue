@@ -4,10 +4,11 @@
       <font size="20">Business Buddy</font>
     </h1>
     <hr style="color:dark grey;height:2px;" />
-    <!-- <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
-      </div> -->
+    <div id="nav">
+      <router-link to="/">Home</router-link>|
+      <router-link to="/login">Login/Register</router-link
+      ><!--modified-->
+    </div>
     <router-view />
   </div>
 </template>
@@ -23,6 +24,7 @@
 
 #nav {
   padding: 30px;
+  text-align: right;
 
   a {
     font-weight: bold;

@@ -87,7 +87,7 @@ export default {
   background-size: 100% 100%;
 }
 .but {
-  background-color: #252b59; /* Green */
+  background-color: #252b59; /* Green#252b59 */
   border: none;
   color: white;
   padding: 15px 32px;
