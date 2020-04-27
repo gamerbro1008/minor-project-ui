@@ -8,35 +8,37 @@
         <div class="formhead card" id="login">
           <h1 align="center">LOGIN</h1>
         </div>
-        <form method="post" action="/login">
-          <div class="card">
-            <label for="username" class="lbl">Username:</label>
-            <input
-              type="text"
-              name="username"
-              class="card"
-              placeholder="Please Enter Your Username"
-              required
-            /><br />
-            <label for="pass" class="lbl">Password:</label>
-            <input
-              type="password"
-              name="pass"
-              class="card"
-              placeholder="Please Enter Your Password"
-              required
-            />
-            <br />
-            <button class="btn" type="submit" value="submit">GO!</button>
-          </div>
-          <label for="quesregister" class="lab fl">New to Business Buddy?</label
-          ><br />
-          <button class="btn col2 bor" v-on:click="setRegister()">
-            Sign up!
-          </button>
-          <!-- <label for='quesregister' class="lbl">New to Business Buddy?</label> -->
-          <!-- <button class="btn">Let's Sign up!</button> -->
-        </form>
+        <!--<form>-->
+        <div class="card">
+          <label for="username" class="lbl">Username:</label>
+          <input
+            type="text"
+            name="username"
+            class="card"
+            placeholder="Please Enter Your Username"
+            required
+            v-model="username"
+          /><br />
+          <label for="pass" class="lbl">Password:</label>
+          <input
+            type="password"
+            name="pass"
+            class="card"
+            placeholder="Please Enter Your Password"
+            required
+            v-model="pass"
+          />
+          <br />
+          <button class="btn" v-on:click="doLogin()">GO!</button>
+        </div>
+        <label for="quesregister" class="lab fl">New to Business Buddy?</label
+        ><br />
+        <button class="btn col2 bor" v-on:click="setRegister()">
+          Sign up!
+        </button>
+        <!-- <label for='quesregister' class="lbl">New to Business Buddy?</label> -->
+        <!-- <button class="btn">Let's Sign up!</button> -->
+        <!--</form>-->
       </div>
 
       <!---------bytech walon ka form--------->
@@ -130,14 +132,39 @@
 </template>
 
 <script>
+import { host } from "@/server.js";
 export default {
   name: "login",
   data() {
     return {
-      register: false
+      register: false,
+      username: "",
+      pass: "",
+      isSaving: false,
+      msg: ""
     };
   },
   methods: {
+    doLogin: async function() {
+      this.isSaving = true;
+      await fetch(`${host}/api/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: this.username,
+          pass: this.pass
+        })
+      });
+      this.username = "";
+      this.pass = "";
+      this.isSaving = false;
+      this.msg = "Login attempted!";
+      setTimeout(() => {
+        this.msg = "";
+      }, 2000);
+    },
     setRegister: function() {
       this.register = !this.register;
     }
