@@ -1,9 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { host } from "@/server.js";
-import html2canvas from "html2canvas";
+//import html2canvas from "html2canvas";
 
 Vue.use(Vuex);
+// var proxy = require('html2canvas-proxy');
+// var express = require('express');
+
+// var app = express();
+// app.use('/', proxy());
 
 export default new Vuex.Store({
   state: {
@@ -110,11 +115,48 @@ export default new Vuex.Store({
       state.selectedKey = -1;
       state.key = -1;
     },
-    saveFlowchart() {
-      html2canvas(document.querySelector("#flow")).then(canvas => {
-        document.body.appendChild(canvas);
-      });
-    },
+    //saveFlowchart() {
+    // var replaceSVGwithCanvas = function(callback) {
+    //   //find all svg elements in $container
+    //   var $container = $("flow");
+    //   //$container is the jQuery object of the div that you need to convert to image. This div may contain highcharts along with other child divs, etc
+    //   var svgElements = $container.find("svg");
+    //   svgElements.each(function() {
+    //     var canvas, xml;
+    //     canvas = document.createElement("canvas");
+    //     canvas.className = "screenShotTempCanvas";
+    //     //convert SVG into a XML string
+    //     xml = new XMLSerializer().serializeToString(this);
+    //     // Removing the name space as IE throws an error
+    //     xml = xml.replace(/xmlns=\"http:\/\/www\.w3\.org\/2000\/svg\"/, "");
+    //     //draw the SVG onto a canvas
+    //     canvg(canvas, xml);
+    //     $(canvas).insertAfter(this);
+    //     $(this).hide();
+    //   });
+    //   callback(); //to be called after the process in finished
+    // };
+    // replaceSVGwithCanvas(function onComplete() {
+    //   html2canvas(document.getElementById("canvas"), {
+    //     onrendered: function(canvasObj) {
+    //       startPrintProcess(canvasObj, "printedPDF", function() {
+    //         alert("PDF saved");
+    //       });
+    //       //save this object to the pdf
+    //     }
+    //   });
+    // });
+
+    //   html2canvas(document.querySelector("#flow"), {
+    //     foreignObjectRendering: true,
+    //     windowWidth: document.querySelector("#flow").scrollWidth,
+    //     windowHeight: document.querySelector("#flow").scrollHeight
+    //   }).then(canvas => {
+    //     document.body.appendChild(canvas);
+    //     var img = canvas.toDataURL();
+    //     console.log(img);
+    //   });
+    // },
     changeSelectedPosition(state, key = null) {
       if (key == null) {
         key = state.key;
