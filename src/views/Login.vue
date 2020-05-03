@@ -1,75 +1,81 @@
 <template>
-  <div v-if="register == false">
-    <div class="login">
-      <h1>
-        Login to get access to our services which are made...only for you!
-      </h1>
-      <div class="card">
-        <div class="formhead card" id="login">
-          <h1 align="center">LOGIN</h1>
-        </div>
-        <!--<form>-->
+  <div v-if="loggedIn == false">
+    <div v-if="register == false">
+      <div class="login">
+        <h1>
+          Login to get access to our services which are made...only for you!
+        </h1>
         <div class="card">
-          <label for="username" class="lbl">Username:</label>
-          <input
-            type="text"
-            name="username"
-            class="card"
-            placeholder="Please Enter Your Username"
-            required
-            v-model="username"
-          /><br />
-          <label for="pass" class="lbl">Password:</label>
-          <input
-            type="password"
-            name="pass"
-            class="card"
-            placeholder="Please Enter Your Password"
-            required
-            v-model="pass"
-          />
-          <br />
-          <button class="btn" v-on:click="doLogin()">GO!</button>
+          <div class="formhead card" id="login">
+            <h1 align="center">LOGIN</h1>
+          </div>
+          <!--<form>-->
+          <div class="card">
+            <label for="username" class="lbl">Username:</label>
+            <input
+              type="text"
+              name="username"
+              class="card"
+              placeholder="Please Enter Your Username"
+              required
+              v-model="username"
+            /><br />
+            <label for="pass" class="lbl">Password:</label>
+            <input
+              type="password"
+              name="pass"
+              class="card"
+              placeholder="Please Enter Your Password"
+              required
+              v-model="pass"
+            />
+            <br />
+            <button class="btn" v-on:click="doLogin()">GO!</button>{{ msg }}
+            <div></div>
+          </div>
+          <label for="quesregister" class="lab fl">New to Business Buddy?</label
+          ><br />
+          <button class="btn col2 bor" v-on:click="setRegister()">
+            Sign up!
+          </button>
+          <!-- <label for='quesregister' class="lbl">New to Business Buddy?</label> -->
+          <!-- <button class="btn">Let's Sign up!</button> -->
+          <!--</form>-->
         </div>
-        <label for="quesregister" class="lab fl">New to Business Buddy?</label
-        ><br />
-        <button class="btn col2 bor" v-on:click="setRegister()">
-          Sign up!
-        </button>
-        <!-- <label for='quesregister' class="lbl">New to Business Buddy?</label> -->
-        <!-- <button class="btn">Let's Sign up!</button> -->
-        <!--</form>-->
-      </div>
 
-      <!---------bytech walon ka form--------->
-      <!---------bytech walon ka form--------->
-      <!---------bytech walon ka form--------->
+        <!---------bytech walon ka form--------->
+        <!---------bytech walon ka form--------->
+        <!---------bytech walon ka form--------->
+      </div>
     </div>
-  </div>
-  <div v-else>
-    <div class="card">
-      <div class="card formhead" id="sign"><h1 align="center">SIGN-UP</h1></div>
-      <form method="get">
+    <div v-else>
+      <div class="card">
+        <div class="card formhead" id="sign">
+          <h1 align="center">SIGN-UP</h1>
+        </div>
+
         <div class="card">
           <!-- <div class="invisible-card"> -->
-          <label for="fname" class="lbl">First Name:</label>
+          <label for="name" class="lbl">Name:</label>
           <input
             type="text"
-            name="fname"
+            name="name"
             class="card fr"
-            placeholder="Please Enter Your Fisrt Name"
+            placeholder="Please Enter Your Name"
             required
+            v-model="name"
           /><br />
           <br />
           <!-- </div> -->
           <!-- <div class="invisible-card"> -->
-          <label for="lname" class="lbl">Last Name:</label><br />
+          <label for="orgName" class="lbl">organisation name:</label><br />
           <input
             type="text"
-            name="lname"
+            name="orgName"
             class="card fr"
-            placeholder="Please Enter Your Last Name"
+            placeholder="Please Enter Your Organisation name"
             required
+            v-model="orgName"
           /><br />
           <br />
           <!--</div>-->
@@ -81,25 +87,28 @@
             class="card fr"
             placeholder="Please Enter Your Email-id"
             required
+            v-model="email"
           /><br />
           <br />
           <!-- </div> -->
-          <label for="phone" class="lbl">Phone number:</label>
+          <label for="contact" class="lbl">Phone number:</label>
           <input
             type="number"
-            name="phone"
+            name="contact"
             class="card fr"
             placeholder="Enter Your Phone Number"
             required
+            v-model="contact"
           />
           <br />
-          <label for="dusername" class="lbl">Username:</label>
+          <label for="orgDesc" class="lbl">Organisation description:</label>
           <input
             type="text"
-            name="username"
+            name="orgDesc"
             class="card fr"
-            placeholder="Please Enter Your Desired Username"
+            placeholder="Please Enter Your Organisation description"
             required
+            v-model="orgDesc"
           /><br />
           <br />
           <label for="pass" class="lbl">Password:</label>
@@ -109,6 +118,7 @@
             class="card fr"
             placeholder="Set Your Password"
             required
+            v-model="Rpass"
           />
           <br />
           <label for="Cpass" class="lbl">Confirm Password:</label>
@@ -118,45 +128,92 @@
             class="card fr"
             placeholder="Confirm Your Password"
             required
+            v-model="Cpass"
           />
           <br />
-          <button class="btn col2 bor" type="submit" value="submit">
-            SIGN-UP!
-          </button>
+          <button class="btn col2 bor" v-on:click="doRegister()">
+            SIGN-UP!</button
+          >{{ passMsg }}
         </div>
-      </form>
-      <label for="quesregister" class="lab fl">Already registered?</label><br />
-      <button class="btn col2 bor" v-on:click="setRegister()">Log In!</button>
+
+        <label for="quesregister" class="lab fl">Already registered?</label
+        ><br />
+        <button class="btn col2 bor" v-on:click="setRegister()">Log In!</button>
+      </div>
     </div>
+  </div>
+  <div v-else>
+    <ModelRecommender />
   </div>
 </template>
 
 <script>
 import { host } from "@/server.js";
+import { mapGetters } from "vuex";
+import ModelRecommender from "@/components/ModelBuilder/ModelRecommender/ModelRecommender.vue";
+
 export default {
   name: "login",
+  components: {
+    ModelRecommender
+  },
+
   data() {
     return {
       register: false,
       username: "",
       pass: "",
       isSaving: false,
-      msg: ""
+      msg: "",
+      //user: []
+      name: "",
+      orgName: "",
+      email: "",
+      contact: 0,
+      orgDesc: "",
+      Rpass: "",
+      Cpass: "",
+      passMsg: ""
     };
+  },
+  computed: {
+    ...mapGetters({
+      loggedIn: "loggedInToggle",
+      userDetail: "loggedInDetails"
+    })
   },
   methods: {
     doLogin: async function() {
       this.isSaving = true;
-      await fetch(`${host}/api/login/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: this.username,
-          pass: this.pass
-        })
-      });
+
+      if (
+        this.username == "" ||
+        this.username == null ||
+        this.pass == "" ||
+        this.pass == null
+      ) {
+        return;
+      }
+
+      const res = await fetch(
+        `${host}/api/login/${this.username}/${this.pass}/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: this.username,
+            pass: this.pass
+          })
+        }
+      );
+      ///////////////////
+      const userDetails = await res.json();
+      this.$store.commit("loggedInToggle", userDetails);
+      ///////////////////////
+      //const users = await res.json();
+      //this.user = users;
       this.username = "";
       this.pass = "";
       this.isSaving = false;
@@ -167,6 +224,36 @@ export default {
     },
     setRegister: function() {
       this.register = !this.register;
+    },
+    doRegister: async function() {
+      this.isSaving = true;
+      if (this.Rpass != this.Cpass) {
+        this.passMsg = "Passwords do not match";
+      } else {
+        console.log(this.name);
+
+        await fetch(`${host}/api/register/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: this.name,
+            orgName: this.orgName,
+            email: this.email,
+            contact: this.contact,
+            orgDesc: this.orgDesc,
+            Rpass: this.Rpass
+          })
+        });
+        this.name = "";
+        this.description = "";
+        this.isSaving = false;
+        this.msg = "Registered successfully";
+        setTimeout(() => {
+          this.msg = "";
+        }, 2000);
+      }
     }
   }
 };

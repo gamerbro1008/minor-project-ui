@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { host } from "@/server.js";
+import html2canvas from "html2canvas";
 
 Vue.use(Vuex);
 
@@ -10,12 +11,21 @@ export default new Vuex.Store({
     selectedDept: null,
     selectedActivities: [],
     selectedKey: -1,
+    loggedIn: false,
+    userDetail: null,
     key: -1
   },
   mutations: {
     selectedOrgChanged(state, newOrg) {
       state.selectedOrg = newOrg;
       state.selectedDept = null;
+    },
+    loggedInToggle(state, logvalue) {
+      state.loggedIn = logvalue["inDB"];
+      state.userDetail = logvalue["userDetail"];
+    },
+    loggedInDetails(state, logvalue) {
+      state.userDetail = logvalue["userDetail"];
     },
     selectedDeptChanged(state, newDept) {
       if (newDept != state.selectedDept) {
@@ -100,6 +110,11 @@ export default new Vuex.Store({
       state.selectedKey = -1;
       state.key = -1;
     },
+    saveFlowchart() {
+      html2canvas(document.querySelector("#flow")).then(canvas => {
+        document.body.appendChild(canvas);
+      });
+    },
     changeSelectedPosition(state, key = null) {
       if (key == null) {
         key = state.key;
@@ -113,6 +128,12 @@ export default new Vuex.Store({
     },
     selectedDeptChanged(state) {
       return state.selectedDept;
+    },
+    loggedInToggle(state) {
+      return state.loggedIn;
+    },
+    loggedInDetails(state) {
+      return state.userDetail;
     },
     activities(state) {
       return state.selectedActivities;

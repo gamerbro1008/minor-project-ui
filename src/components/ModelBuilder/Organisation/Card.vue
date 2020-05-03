@@ -7,7 +7,6 @@
     <p>{{ deptData.description }}</p>
   </div>
 </template>
-
 <script>
 export default {
   name: "Card",

@@ -2,6 +2,7 @@
   <div>
     <button v-on:click="clearActivities" class="btn">Clear</button>
     <button v-on:click="removeActivity" class="btn">Remove</button>
+    <button v-on:click="saveFlowchart" class="btn">Save</button>
     <!-- <button v-on:click="joinActivity(joinWith)">Join</button>
       <input type="number" v-model="joinWith"> -->
   </div>
@@ -12,7 +13,12 @@ import { mapMutations } from "vuex";
 export default {
   name: "FlowchartOperations",
   methods: {
-    ...mapMutations(["clearActivities", "removeActivity", "joinActivity"])
+    ...mapMutations([
+      "clearActivities",
+      "removeActivity",
+      "joinActivity",
+      "saveFlowchart"
+    ])
   },
   data() {
     return {

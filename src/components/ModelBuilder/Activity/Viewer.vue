@@ -2,14 +2,18 @@
   <div class="viewer">
     <div>Selected Node: {{ selectedPosition }}</div>
     <FlowchartOperations />
-    <Flowchart :nodes="allActivities" v-if="isRefreshing == false" />
+    <div id="flow">
+      <Flowchart :nodes="allActivities" v-if="isRefreshing == false" />
+    </div>
   </div>
 </template>
 
 <script>
+//import html2canvas from 'html2canvas';
 import { mapGetters, mapMutations } from "vuex";
 import Flowchart from "./Flowchart";
 import FlowchartOperations from "./FlowcartOperations";
+
 export default {
   name: "Viewer",
   computed: {

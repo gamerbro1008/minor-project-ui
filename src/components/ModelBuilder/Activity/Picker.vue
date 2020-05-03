@@ -101,7 +101,9 @@ export default {
       const res = await fetch(
         `${host}/api/org/${this.selectedOrg.id}/dept/${this.selectedDept.id}/activityScore/${this.lastActivity.id}/search/${this.searchTerm}`
       );
+      // console.log(res);
       const acts = await res.json();
+      console.log(acts);
       this.searchedActivities = acts;
     }
   },
