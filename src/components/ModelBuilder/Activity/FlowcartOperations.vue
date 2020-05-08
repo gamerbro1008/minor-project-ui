@@ -2,9 +2,10 @@
   <div>
     <button v-on:click="clearActivities" class="btn">Clear</button>
     <button v-on:click="removeActivity" class="btn">Remove</button>
-    <button v-on:click="saveFlowchart" class="btn">Save</button>
+    <button @click="saveFlowchart" class="link-download btn">Save</button>
     <!-- <button v-on:click="joinActivity(joinWith)">Join</button>
       <input type="number" v-model="joinWith"> -->
+    <!-- <canvas id="canvas" width="500" height="500"></canvas>-->
   </div>
 </template>
 

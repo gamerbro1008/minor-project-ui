@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { host } from "@/server.js";
-//import html2canvas from "html2canvas";
+import { svgAsDataUri } from "save-svg-as-png";
 
 Vue.use(Vuex);
 // var proxy = require('html2canvas-proxy');
@@ -18,7 +18,8 @@ export default new Vuex.Store({
     selectedKey: -1,
     loggedIn: false,
     userDetail: null,
-    key: -1
+    key: -1,
+    modeluri: ""
   },
   mutations: {
     selectedOrgChanged(state, newOrg) {
@@ -115,48 +116,37 @@ export default new Vuex.Store({
       state.selectedKey = -1;
       state.key = -1;
     },
-    //saveFlowchart() {
-    // var replaceSVGwithCanvas = function(callback) {
-    //   //find all svg elements in $container
-    //   var $container = $("flow");
-    //   //$container is the jQuery object of the div that you need to convert to image. This div may contain highcharts along with other child divs, etc
-    //   var svgElements = $container.find("svg");
-    //   svgElements.each(function() {
-    //     var canvas, xml;
-    //     canvas = document.createElement("canvas");
-    //     canvas.className = "screenShotTempCanvas";
-    //     //convert SVG into a XML string
-    //     xml = new XMLSerializer().serializeToString(this);
-    //     // Removing the name space as IE throws an error
-    //     xml = xml.replace(/xmlns=\"http:\/\/www\.w3\.org\/2000\/svg\"/, "");
-    //     //draw the SVG onto a canvas
-    //     canvg(canvas, xml);
-    //     $(canvas).insertAfter(this);
-    //     $(this).hide();
-    //   });
-    //   callback(); //to be called after the process in finished
-    // };
-    // replaceSVGwithCanvas(function onComplete() {
-    //   html2canvas(document.getElementById("canvas"), {
-    //     onrendered: function(canvasObj) {
-    //       startPrintProcess(canvasObj, "printedPDF", function() {
-    //         alert("PDF saved");
-    //       });
-    //       //save this object to the pdf
-    //     }
-    //   });
-    // });
+    async saveFlowchart(state) {
+      console.log("in save flowchart");
+      var x = document.getElementsByTagName("rect");
+      console.log(document.getElementsByTagName("rect").length);
+      for (var i = 0; i < x.length; i++) {
+        console.log("in loop");
+        x[i].style.stroke = "#000";
+        x[i].style.strokeWidth = 2;
+        x[i].style.fillOpacity = 0.1;
+        console.log("updated");
+      }
+      var path = document.getElementsByClassName("path");
+      console.log("paths: ", path);
+      console.log("path length:" + path.length);
+      for (var j = 0; j < path.length; j++) {
+        console.log("in path loop");
+        path[j].style.stroke = "black";
+        path[j].style.strokeWidth = 1.5;
 
-    //   html2canvas(document.querySelector("#flow"), {
-    //     foreignObjectRendering: true,
-    //     windowWidth: document.querySelector("#flow").scrollWidth,
-    //     windowHeight: document.querySelector("#flow").scrollHeight
-    //   }).then(canvas => {
-    //     document.body.appendChild(canvas);
-    //     var img = canvas.toDataURL();
-    //     console.log(img);
-    //   });
-    // },
+        console.log("updated");
+      }
+      await svgAsDataUri(document.getElementById("f")).then(
+        uri =>
+          // console.log(uri),
+          // console.log("............111111111111111111111111111111........."),
+          (state.modeluri = uri),
+        console.log(state.modeluri)
+      );
+      console.log("1111111111111111111111111111111111111");
+      console.log(state.modeluri);
+    },
     changeSelectedPosition(state, key = null) {
       if (key == null) {
         key = state.key;
@@ -189,6 +179,9 @@ export default new Vuex.Store({
     },
     selectedPosition(state) {
       return state.selectedKey;
+    },
+    modelLink(state) {
+      return state.modeluri;
     }
   }
 });

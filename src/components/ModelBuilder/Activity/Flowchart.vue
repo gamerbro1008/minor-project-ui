@@ -20,6 +20,8 @@ export default {
     ...mapMutations(["changeSelectedPosition"])
   },
   mounted() {
+    console.log("in mounted");
+
     const that = this;
     console.log(this.nodes);
     const processingDict = {};
@@ -41,9 +43,17 @@ export default {
   },
   beforeDestroy() {
     console.log("Destroyed");
+
     this.chart.destroy();
   }
 };
+//path;
+
+// var contentBox=document.getElementsByTagName("rect");
+// contentBox.style.fill="white";
+// contentBox.style.stroke= "#000";
+// contentBox.style.stroke-width = 2;
+// contentBox.style.fill-opacity= 0.1;
 </script>
 
 <style lang="scss">
