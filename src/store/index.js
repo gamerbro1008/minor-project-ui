@@ -19,7 +19,8 @@ export default new Vuex.Store({
     loggedIn: false,
     userDetail: null,
     key: -1,
-    modeluri: ""
+    modeluri: "",
+    isSaving: false
   },
   mutations: {
     selectedOrgChanged(state, newOrg) {
@@ -146,6 +147,30 @@ export default new Vuex.Store({
       );
       console.log("1111111111111111111111111111111111111");
       console.log(state.modeluri);
+      //console.log(state.userDetail.name, state.loggedIn);
+      console.log(state.selectedDept.id, state.selectedDept.orgId);
+      ////////////////////////////////////////////
+      state.isSaving = true;
+      if (state.loggedIn != true) {
+        state.userDetail = { id: 0 };
+        console.log(state.userDetail.id);
+      }
+
+      //console.log(this.name);
+
+      await fetch(`${host}/api/model/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          dataUri: state.modeluri,
+          userId: state.userDetail.id,
+          orgId: state.selectedDept.orgId,
+          deptId: state.selectedDept.id,
+          score: 1
+        })
+      });
     },
     changeSelectedPosition(state, key = null) {
       if (key == null) {

@@ -5,7 +5,7 @@
     <Card v-for="(dept, i) in depts" v-bind:key="i" v-bind:deptData="dept" />
   </div>
   <div v-else>
-    <h1>You have selected {{ selectedDept.name }} department</h1>
+    <h2>You have selected {{ selectedDept.name }} department</h2>
     <button v-on:click="clearDept" class="but">Choose Department</button>
     <MyModel />
   </div>

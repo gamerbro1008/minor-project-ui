@@ -5,7 +5,7 @@
       src="@/assets/img/business_banner1.jpg"
       alt="business banner"
     />
-    <h3>We can help you to create a Business Procesess Model like...</h3>
+    <h3>We can help you to create Business Process Models like...</h3>
     <img
       class="bpm fit-picture"
       src="@/assets/img/bpm1.png"
@@ -17,7 +17,7 @@
       alt="business banner"
     />
     <img class="bpm" src="@/assets/img/bpm3.png" alt="business banner" />
-    <h1>Let us find a suitable model for your business enterprise.</h1>
+    <h1>Let us find a suitable model for your Business enterprise.</h1>
     <h3>Choose a category</h3>
     <div>
       <Card v-for="(org, i) in orgs" v-bind:key="i" v-bind:orgData="org" />

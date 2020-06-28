@@ -7,7 +7,7 @@
     </div>
   </div>
   <div v-else>
-    <h1>You have selected {{ selectedOrg.name }} organisation</h1>
+    <h2>You have selected {{ selectedOrg.name }} organisation</h2>
     <button v-on:click="clearOrg" class="but">
       Change Selected Organisation
     </button>

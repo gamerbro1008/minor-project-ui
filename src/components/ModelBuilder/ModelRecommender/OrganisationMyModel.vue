@@ -1,13 +1,13 @@
 <template>
   <div v-if="selectedOrg == null">
-    <h1>Let us find a suitable model for your business enterprise.</h1>
+    <h1>Find the Models created by you for various Business Enterprises</h1>
     <h3>Choose a category</h3>
     <div>
       <Card v-for="(org, i) in orgs" v-bind:key="i" v-bind:orgData="org" />
     </div>
   </div>
   <div v-else>
-    <h1>You have selected {{ selectedOrg.name }} organisation</h1>
+    <h2>You have selected {{ selectedOrg.name }} organisation</h2>
     <button v-on:click="clearOrg" class="but">
       Change Selected Organisation
     </button>

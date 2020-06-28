@@ -62,14 +62,14 @@
             type="text"
             name="name"
             class="card fr"
-            placeholder="Please Enter Your Name"
+            placeholder="Please Enter Your Name/username"
             required
             v-model="name"
           /><br />
           <br />
           <!-- </div> -->
           <!-- <div class="invisible-card"> -->
-          <label for="orgName" class="lbl">organisation name:</label><br />
+          <label for="orgName" class="lbl">organisation name:</label>
           <input
             type="text"
             name="orgName"
@@ -94,7 +94,7 @@
           <!-- </div> -->
           <label for="contact" class="lbl">Phone number:</label>
           <input
-            type="number"
+            type="text"
             name="contact"
             class="card fr"
             placeholder="Enter Your Phone Number"
@@ -102,7 +102,7 @@
             v-model="contact"
           />
           <br />
-          <label for="orgDesc" class="lbl">Organisation description:</label>
+          <label for="orgDesc" class="lbl">Describe Organisation:</label>
           <input
             type="text"
             name="orgDesc"
@@ -170,7 +170,7 @@ export default {
       name: "",
       orgName: "",
       email: "",
-      contact: 0,
+      contact: null,
       orgDesc: "",
       Rpass: "",
       Cpass: "",
@@ -248,6 +248,13 @@ export default {
           })
         });
         this.name = "";
+        (this.orgName = ""),
+          (this.email = ""),
+          (this.contact = null),
+          (this.orgDesc = ""),
+          (this.Rpass = ""),
+          (this.Cpass = ""),
+          (this.passMsg = "");
         this.description = "";
         this.isSaving = false;
         this.msg = "Registered successfully";
